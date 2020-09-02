@@ -14,6 +14,7 @@ import (
 const (
 	commandTriggerHooks            = "demo_plugin"
 	commandTriggerDialog           = "dialog"
+	commandTriggerMRE              = "mre"
 	commandTriggerAutocompleteTest = "autocomplete_test"
 
 	dialogStateSome                = "somestate"
@@ -46,6 +47,13 @@ func (p *Plugin) registerCommands() error {
 		Trigger:          commandTriggerAutocompleteTest,
 		AutoComplete:     true,
 		AutocompleteData: getAutocompleteTestAutocompleteData(),
+	}); err != nil {
+		return errors.Wrapf(err, "failed to register %s command", commandTriggerDialog)
+	}
+
+	if err := p.API.RegisterCommand(&model.Command{
+		Trigger:      commandTriggerMRE,
+		AutoComplete: true,
 	}); err != nil {
 		return errors.Wrapf(err, "failed to register %s command", commandTriggerDialog)
 	}
@@ -109,6 +117,8 @@ func (p *Plugin) ExecuteCommand(c *plugin.Context, args *model.CommandArgs) (*mo
 		return p.executeCommandDialog(args), nil
 	case commandTriggerAutocompleteTest:
 		return p.executeAutocompleteTest(args), nil
+	case commandTriggerMRE:
+		return p.executeSendMRECommand(args), nil
 
 	default:
 		return &model.CommandResponse{
