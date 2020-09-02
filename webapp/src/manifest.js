@@ -2,10 +2,10 @@
 
 const manifest = JSON.parse(`
 {
-    "id": "com.mattermost.plugin-starter-template",
-    "name": "Plugin Starter Template",
-    "description": "This plugin serves as a starting point for writing a Mattermost plugin.",
-    "version": "0.1.0",
+    "id": "com.daimler.mic.chatops-service-plugin",
+    "name": "ChatOps Service Plugin",
+    "description": "ChatOps Service Plugin.",
+    "version": "1.0.4",
     "min_server_version": "5.12.0",
     "server": {
         "executables": {
