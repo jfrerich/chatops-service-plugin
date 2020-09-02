@@ -25,4 +25,27 @@ func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Req
 	fmt.Fprint(w, "Hello, world!")
 }
 
-// See https://developers.mattermost.com/extend/plugins/server/reference/
+// OnActivate runs when the plugin activates and ensures the plugin is properly
+// configured.
+func (p *Plugin) OnActivate() error {
+	// bot := &model.Bot{
+	// 	Username:    "bookmarks",
+	// 	DisplayName: "Bookmarks",
+	// 	Description: "Created by the Bookmarks plugin.",
+	// }
+	// options := []plugin.EnsureBotOption{
+	// 	plugin.ProfileImagePath("assets/profile.png"),
+	// }
+
+	// p.initialiseAPI()
+
+	// botID, err := p.Helpers.EnsureBot(bot, options...)
+	// if err != nil {
+	// 	return errors.Wrap(err, "failed to ensure Bookmarks bot")
+	// }
+	// p.BotUserID = botID
+
+	// return p.API.RegisterCommand(createBookmarksCommand())
+	p.registerCommands()
+	return nil
+}
